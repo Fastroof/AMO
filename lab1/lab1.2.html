@@ -23,19 +23,26 @@
 </head>
 <body>
   <div class="content">
-    <p>Завдання 1</p>
+    <p>Завдання 2</p>
     <div class="task border border-2">
-      $$Y1=lg(\frac{a}{b})+ln(\frac{b}{a})$$
+      Якщо \( i\:mod\:3\leqslant 1\), то
+      $$y=\sqrt{\frac{a^{b\cdot i}}{c^{\frac{i}{a}}}}+\sqrt{\frac{b^{c\cdot i}}{a^{\frac{i}{c}}}}$$
+      інакше
+      $$y=\frac{a\:+\:b}{(c\:+\:a)^{i}}+(i+c^i)$$
     </div>
     <form>
+      <label for="i">i (тільки число)*</label><br>
+      <input type="number" step="any" id="i" name="i" required><br>
       <label for="a">a (тільки число)*</label><br>
       <input type="number" step="any" id="a" name="a" required><br>
       <label for="b">b (тільки число)*</label><br>
-      <input type="number" step="any" id="b" name="b" required><br><br>
-      <input type="submit" value="Порахувати Y1" id="submit">
+      <input type="number" step="any" id="b" name="b" required><br>
+      <label for="c">c (тільки число)*</label><br>
+      <input type="number" step="any" id="c" name="c" required><br><br>
+      <input type="submit" value="Порахувати y" id="submit">
     </form>
     <br>
-    <p id="y1"></p>
+    <p id="y"></p>
   </div>
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -46,16 +53,25 @@
   <script type="text/javascript">
     jQuery(function() {
       $('form').on('submit', t => {
+        var i = $('#i').val()
         var a = $('#a').val()
         var b = $('#b').val()
-        var res = (Math.log10(a/b)+Math.log(b/a)).toFixed(10)
-        if (isNaN(res)) {
-          $('#y1').text("Щось неможливо з такими значеннями розрахувати!")
+        var c = $('#c').val()
+        if (i % 3 <= 1) {
+          res((Math.sqrt((a^(b*i))/(c^(i/a))) + Math.sqrt((b^(c*i))/(a^(i/c)))).toFixed(10))
         } else {
-          $('#y1').text("Y1 = " + res)
+          res(((a+b)/((c+a)^i) + (i+c^i)).toFixed(10))
         }
         return false
       })
+
+      function res(res) {
+        if (isNaN(res)) {
+          $('#y').text("Щось неможливо з такими значеннями розрахувати!")
+        } else {
+          $('#y').text("y = " + res)
+        }
+      }
     })
   </script>
 </body>

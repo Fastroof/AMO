@@ -23,19 +23,19 @@
 </head>
 <body>
   <div class="content">
-    <p>Завдання 1</p>
+    <p>Завдання 3</p>
     <div class="task border border-2">
-      $$Y1=lg(\frac{a}{b})+ln(\frac{b}{a})$$
+      $$f = \sum_{i=1}^{n} \left ( \frac{p_i+i}{\sum_{j=1}^{n} \left ( \frac{p_i+p_j}{p_j-j} \right )} \right )$$
     </div>
     <form>
-      <label for="a">a (тільки число)*</label><br>
-      <input type="number" step="any" id="a" name="a" required><br>
-      <label for="b">b (тільки число)*</label><br>
-      <input type="number" step="any" id="b" name="b" required><br><br>
-      <input type="submit" value="Порахувати Y1" id="submit">
+      <label for="p">p (тільки числа через кому)*</label><br>
+      <input type="number" step="any" id="p" name="p" required><br>
+      <label for="n">n (тільки число)*</label><br>
+      <input type="number" step="any" id="n" name="n" required><br><br>
+      <input type="submit" value="Порахувати f" id="submit">
     </form>
     <br>
-    <p id="y1"></p>
+    <p id="f"></p>
   </div>
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -46,14 +46,9 @@
   <script type="text/javascript">
     jQuery(function() {
       $('form').on('submit', t => {
-        var a = $('#a').val()
-        var b = $('#b').val()
-        var res = (Math.log10(a/b)+Math.log(b/a)).toFixed(10)
-        if (isNaN(res)) {
-          $('#y1').text("Щось неможливо з такими значеннями розрахувати!")
-        } else {
-          $('#y1').text("Y1 = " + res)
-        }
+        var p = $('#p').val()
+        var n = $('#n').val()
+        var f = 0
         return false
       })
     })
