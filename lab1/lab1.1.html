@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <style media="screen">
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    /* Firefox */
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
+
+    .content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  </style>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class="content">
+    <p>Завдання 1</p>
+    $$Y1=lg(\frac{a}{b})+ln(\frac{b}{a})$$
+
+    <form>
+      <label for="a">a (тільки число)*</label><br>
+      <input type="number" step="any" id="a" name="a" required><br>
+      <label for="b">b (тільки число)*</label><br>
+      <input type="number" step="any" id="b" name="b" required><br><br>
+      <span class="validity"></span>
+      <input type="submit" value="Порахувати Y1" id="submit">
+    </form>
+
+    <p id="y1"></p>
+  </div>
+
+  <script type="text/javascript">
+    jQuery(function() {
+      $('form').on('submit', t => {
+        var a = $('#a').val()
+        var b = $('#b').val()
+        $('#y1').text("Y1 = " + (Math.log10(a/b)+Math.log(b/a)).toFixed(10))
+        return false
+      })
+    })
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
