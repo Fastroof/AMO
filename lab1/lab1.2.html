@@ -31,15 +31,24 @@
       $$y=\frac{a\:+\:b}{(c\:+\:a)^{i}}+(i+c^i)$$
     </div>
     <form>
-      <label for="i">i (тільки число)*</label><br>
-      <input type="number" step="any" id="i" name="i" required><br>
-      <label for="a">a (тільки число)*</label><br>
-      <input type="number" step="any" id="a" name="a" required><br>
-      <label for="b">b (тільки число)*</label><br>
-      <input type="number" step="any" id="b" name="b" required><br>
-      <label for="c">c (тільки число)*</label><br>
-      <input type="number" step="any" id="c" name="c" required><br><br>
-      <input type="submit" value="Порахувати y" id="submit">
+      <div style="display: flex">
+        <div>
+          <p>Уведіть значення</p>
+          <label for="i">i (тільки число)*</label><br>
+          <input type="number" step="any" id="i" name="i" required><br>
+          <label for="a">a (тільки число)*</label><br>
+          <input type="number" step="any" id="a" name="a" required><br>
+          <label for="b">b (тільки число)*</label><br>
+          <input type="number" step="any" id="b" name="b" required><br>
+          <label for="c">c (тільки число)*</label><br>
+          <input type="number" step="any" id="c" name="c" required><br><br>
+        </div>
+        <div class="m-auto px-2">
+          <p>або завантажте файл<br>(дані повинні бути розділені ';' )</p>
+          <input type="file" onchange="readFile(this)">
+        </div>
+      </div>
+      <input style="width: 100%" type="submit" value="Порахувати y" id="submit">
     </form>
     <br>
     <p id="y"></p>
@@ -73,6 +82,38 @@
         }
       }
     })
+
+    function readFile(input) {
+      let file = input.files[0];
+      let reader = new FileReader();
+      reader.readAsText(file);
+
+      reader.onload = function() {
+        var tmp = reader.result
+        var arr = tmp.split(";").map(x=>+x)
+        if (arr.length === 4) {
+          var normal = true
+          for (var i = 0; i < 4; i++) {
+            if (arr[i] === false || Number.isNaN(arr[i])) {
+              alert("Введені неправильні дані!")
+              normal = false
+              break
+            }
+          }
+          document.getElementById("i").value = arr[0]
+          document.getElementById("b").value = arr[1]
+          document.getElementById("a").value = arr[2]
+          document.getElementById("c").value = arr[3]
+        } else {
+          alert("Введені неправильні дані!")
+        }
+      };
+
+      reader.onerror = function() {
+        alert("Файл неможливо прочитати")
+      };
+
+    }
   </script>
 </body>
 </html>
